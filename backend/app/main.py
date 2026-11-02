@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 
+from app.api import health
+from app.core.config import settings
+
 app = FastAPI(
-    title="DevPulse API",
-    description="Real-Time Infrastructure Monitoring & Automation Platform",
-    version="0.1.0",
+    title=settings.app_name,
+    description=settings.app_description,
+    version=settings.app_version,
+    debug=settings.debug,
 )
 
-
-@app.get("/health")
-def health_check() -> dict[str, str]:
-    """Simple endpoint to verify that the API is up and running."""
-    return {"status": "ok"}
+app.include_router(health.router)
