@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     postgres_db: str = "devpulse"
     postgres_host: str = "127.0.0.1"
     postgres_port: int = 5432
+    secret_key: str
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
 
     model_config = SettingsConfigDict(
         env_file="../.env",

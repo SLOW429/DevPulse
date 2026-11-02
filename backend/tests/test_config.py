@@ -2,7 +2,7 @@ from app.core.config import Settings
 
 
 def test_database_url_escapes_special_characters() -> None:
-    settings = Settings(postgres_password="p@ss#w:rd/1")
+    settings = Settings(postgres_password="p@ss#w:rd/1", secret_key="test-secret")
 
     rendered = settings.database_url.render_as_string(hide_password=False)
 
