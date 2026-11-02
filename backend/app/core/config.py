@@ -1,5 +1,10 @@
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
+
+# DevPulse/backend/app/core/config.py -> parents[3] is the project root (DevPulse)
+ENV_FILE = Path(__file__).resolve().parents[3] / ".env"
 
 
 class Settings(BaseSettings):
@@ -15,12 +20,13 @@ class Settings(BaseSettings):
     postgres_db: str = "devpulse"
     postgres_host: str = "127.0.0.1"
     postgres_port: int = 5432
+
     secret_key: str
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
     model_config = SettingsConfigDict(
-        env_file="../.env",
+        env_file=ENV_FILE,
         env_file_encoding="utf-8",
         extra="ignore",
     )
